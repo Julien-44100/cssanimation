@@ -1,7 +1,6 @@
 import "./style.css";
 
 const app = document.querySelector<HTMLDivElement>("#app");
-
 if (!app) throw new Error("Missing #app container");
 
 app.innerHTML = `
@@ -18,19 +17,7 @@ app.innerHTML = `
         <span class="orb o3"></span>
       </div>
 
-      <div class="sparkles" aria-hidden="true">
-        ${Array.from({ length: 48 })
-          .map(
-            (_, i) =>
-              `<i class="s" style="--i:${i};--x:${Math.random()
-                .toFixed(4)};--y:${Math.random().toFixed(4)};--d:${(
-                0.6 + Math.random() * 2.2
-              ).toFixed(3)}s;--sz:${(1 + Math.random() * 2.5).toFixed(
-                2
-              )}px"></i>`
-          )
-          .join("")}
-      </div>
+      <div class="sparkles" aria-hidden="true" id="sparkles"></div>
     </div>
 
     <section class="content">
@@ -81,9 +68,27 @@ app.innerHTML = `
   </main>
 `;
 
+const sparkles = document.querySelector<HTMLDivElement>("#sparkles");
+if (sparkles) {
+  const count = 48;
+  const nodes: string[] = [];
+
+  for (let i = 0; i < count; i++) {
+    const x = Math.random().toFixed(4);
+    const y = Math.random().toFixed(4);
+    const d = (0.6 + Math.random() * 2.2).toFixed(3);
+    const sz = (1 + Math.random() * 2.5).toFixed(2);
+    nodes.push(
+      `<i class="s" style="--i:${i};--x:${x};--y:${y};--d:${d}s;--sz:${sz}px"></i>`
+    );
+  }
+
+  sparkles.innerHTML = nodes.join("");
+}
+
 const btn = document.querySelector<HTMLButtonElement>("#btnPulse");
 btn?.addEventListener("click", () => {
   document.documentElement.classList.remove("pulse");
-  // force reflow
-  void document.documentElement.offsetWidth;
+  void document.documentElement.offsetWidth; // force reflow
   document.documentElement.classList.add("pulse");
+});

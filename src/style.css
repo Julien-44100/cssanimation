@@ -81,4 +81,5 @@ body {
   background-size: 64px 64px;
   opacity: 0.14;
   transform-origin: 50% 50%;
-  transform: perspective(900px) rotateX(55
+  transform: perspective(900px) rotateX(55deg) translate3d(0,0,0);
+}
