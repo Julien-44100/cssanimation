@@ -730,3 +730,84 @@ p{ margin: 0; line-height: 1.6; color: var(--muted); }
 @media (max-width: 520px){
   .cards{ grid-template-columns: 1fr; }
 }
+
+/* ---------------------------
+   Responsive fixes (mobile-first)
+   Paste at the END of style.css
+----------------------------*/
+
+/* Ensure the app can’t get “tiny” due to odd zoom/layout constraints */
+#app {
+  min-height: 100vh;
+}
+
+/* Better default tap/resize behavior */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+.stage {
+  /* More consistent vertical spacing across devices */
+  padding: clamp(18px, 4vw, 56px) clamp(14px, 3vw, 22px);
+}
+
+/* Let content breathe and scale nicely */
+.content {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+}
+
+/* Buttons: stack nicely on small screens */
+.cta-row {
+  align-items: stretch;
+}
+
+.btn {
+  min-height: 44px; /* good mobile tap target */
+}
+
+/* Small screens */
+@media (max-width: 520px) {
+  .content {
+    padding: 18px;
+    border-radius: 18px;
+  }
+
+  .kicker {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+  }
+
+  .title {
+    font-size: clamp(30px, 10vw, 44px);
+  }
+
+  .sub {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+  }
+
+  .lead {
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 14px 0 18px;
+  }
+
+  /* Stack CTAs full width */
+  .cta-row {
+    gap: 10px;
+  }
+
+    .cta-row .btn,
+    .cta-row a.btn {
+      width: 100%;
+      justify-content: center;
+      display: inline-flex;
+    }
+  
+    /* Cards: always 1 column on small screens */
+    .cards {
+      grid-template-columns: 1fr;
+    }
+  }
